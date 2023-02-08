@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 03 fév. 2023 à 10:17
+-- Généré le : mer. 08 fév. 2023 à 14:58
 -- Version du serveur : 8.0.30
 -- Version de PHP : 8.1.10
 
@@ -29,8 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `origins` (
   `id` int NOT NULL,
-  `origin-label` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+  `originLabel` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `origins`
+--
+
+INSERT INTO `origins` (`id`, `originLabel`) VALUES
+(6, '--'),
+(7, 'Un ami m\'en a parlé'),
+(8, 'Recherche sur internet'),
+(9, 'Publicité dans un magazine');
 
 -- --------------------------------------------------------
 
@@ -40,12 +50,22 @@ CREATE TABLE `origins` (
 
 CREATE TABLE `subscribers` (
   `id` int NOT NULL,
-  `datetime` int NOT NULL,
+  `created_on` datetime NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `firstname` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `lastname` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `origine-id` int NOT NULL
+  `origine_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `subscribers`
+--
+
+INSERT INTO `subscribers` (`id`, `created_on`, `email`, `firstname`, `lastname`, `origine_id`) VALUES
+(18, '2023-02-08 14:56:15', 'alfred.dupont@gmail.com', 'Alfred', 'Dupont', NULL),
+(19, '2023-02-08 14:56:15', 'b.lav@hotmail.fr', 'Bertrand', 'Lavoisier', NULL),
+(20, '2023-02-08 14:56:15', 'SarahLAMINE@gmail.com', 'Sarah', 'Lamine', NULL),
+(21, '2023-02-08 14:56:15', 'mo78@laposte.net', 'Mohamed', 'Ben Salam', NULL);
 
 --
 -- Index pour les tables déchargées
@@ -62,7 +82,7 @@ ALTER TABLE `origins`
 --
 ALTER TABLE `subscribers`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fksubscribers` (`origine-id`);
+  ADD KEY `fksubscribers` (`origine_id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -72,13 +92,13 @@ ALTER TABLE `subscribers`
 -- AUTO_INCREMENT pour la table `origins`
 --
 ALTER TABLE `origins`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Contraintes pour les tables déchargées
@@ -88,7 +108,7 @@ ALTER TABLE `subscribers`
 -- Contraintes pour la table `subscribers`
 --
 ALTER TABLE `subscribers`
-  ADD CONSTRAINT `fksubscribers` FOREIGN KEY (`origine-id`) REFERENCES `origins` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fksubscribers` FOREIGN KEY (`origine_id`) REFERENCES `origins` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
