@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 08 fév. 2023 à 14:58
+-- Généré le : mer. 08 fév. 2023 à 15:46
 -- Version du serveur : 8.0.30
 -- Version de PHP : 8.1.10
 
@@ -37,7 +37,6 @@ CREATE TABLE `origins` (
 --
 
 INSERT INTO `origins` (`id`, `originLabel`) VALUES
-(6, '--'),
 (7, 'Un ami m\'en a parlé'),
 (8, 'Recherche sur internet'),
 (9, 'Publicité dans un magazine');
@@ -65,7 +64,8 @@ INSERT INTO `subscribers` (`id`, `created_on`, `email`, `firstname`, `lastname`,
 (18, '2023-02-08 14:56:15', 'alfred.dupont@gmail.com', 'Alfred', 'Dupont', NULL),
 (19, '2023-02-08 14:56:15', 'b.lav@hotmail.fr', 'Bertrand', 'Lavoisier', NULL),
 (20, '2023-02-08 14:56:15', 'SarahLAMINE@gmail.com', 'Sarah', 'Lamine', NULL),
-(21, '2023-02-08 14:56:15', 'mo78@laposte.net', 'Mohamed', 'Ben Salam', NULL);
+(21, '2023-02-08 14:56:15', 'mo78@laposte.net', 'Mohamed', 'Ben Salam', NULL),
+(22, '2023-02-08 16:02:26', 'fddfdf@gf.f', 'Clementfdgrg', 'Paco', 9);
 
 --
 -- Index pour les tables déchargées
@@ -98,7 +98,7 @@ ALTER TABLE `origins`
 -- AUTO_INCREMENT pour la table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Contraintes pour les tables déchargées
