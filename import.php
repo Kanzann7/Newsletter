@@ -32,7 +32,7 @@ while ($row = fgetcsv($file)) {
     $lastname = ucwords($lastname, " -");
     $email = str_replace(" ", "", $email);
 
-    $pdoStatement->execute([$newDate, $email, $firstname, $lastname, $created_on]);
+    $pdoStatement->execute([$newDate, $email, $firstname, $lastname]);
 }
 
 echo 'Import terminé!';

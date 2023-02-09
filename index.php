@@ -5,6 +5,7 @@
 require 'config.php';
 require 'functions.php';
 
+
 $errors = [];
 $success = null;
 $email = '';

@@ -37,7 +37,7 @@ CREATE TABLE `origins` (
 --
 
 INSERT INTO `origins` (`id`, `originLabel`) VALUES
-(7, 'Un ami m\'en a parlé'),
+(7, "Un ami m\'en a parlé"),
 (8, 'Recherche sur internet'),
 (9, 'Publicité dans un magazine');
 
