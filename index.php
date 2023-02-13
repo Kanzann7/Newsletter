@@ -11,6 +11,7 @@ $success = null;
 $email = '';
 $firstname = '';
 $lastname = '';
+$interests_choice = '';
 
 // Si le formulaire a été soumis...
 if (!empty($_POST)) {
@@ -22,6 +23,7 @@ if (!empty($_POST)) {
 
     // On récupère l'origine
     $originSelected = $_POST['origin'];
+    $interestSelected = $_POST['interests_choice'];
 
     // Validation 
     if (!$email) {
@@ -36,11 +38,16 @@ if (!empty($_POST)) {
         $errors['lastname'] = "Merci d'indiquer un nom";
     }
 
+    if(!$interests_choice)
+    {
+        $errors['interests_choice'] = "Veuillez cocher au moins une option !";
+    }
+
     // Si tout est OK (pas d'erreur)
     if (empty($errors)) {
 
         // Ajout de l'email dans le fichier csv
-        addSubscriber($email, $firstname, $lastname, $originSelected);
+        addSubscriber($email, $firstname, $lastname, $originSelected, $interestSelected);
 
         // Message de succès
         $success  = 'Merci de votre inscription';
@@ -53,6 +60,7 @@ if (!empty($_POST)) {
 
 // Sélection de la liste des origines
 $origins = getAllOrigins();
+$interests = getAllInterests();
 
 // Inclusion du template
 include 'index.phtml';

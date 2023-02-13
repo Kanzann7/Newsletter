@@ -28,6 +28,31 @@ function getAllOrigins()
     return $query->fetchAll();
 }
 
+function getAllInterests()
+{
+    // Construction du Data Source Name
+    $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
+
+    // Tableau d'options pour la connexion PDO
+    $options = [
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ];
+
+    // Création de la connexion PDO (création d'un objet PDO)
+    $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
+    $pdo->exec('SET NAMES UTF8');
+
+    $sql = 'SELECT *
+            FROM interests
+            ORDER BY interests_label';
+
+    $query = $pdo->prepare($sql);
+    $query->execute();
+
+    return $query->fetchAll();
+}
+
 
 /**
  * Ajoute un abonné à la liste des emails
