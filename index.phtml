@@ -35,6 +35,8 @@
                     <?php if (isset($errors['email'])) : ?>
                         <p class="message error"><?= $errors['email']; ?></p>
                     <?php endif; ?>
+
+
                 </div>
                 <div class="field-list">
                     <label for="firstname">Prénom</label>
@@ -58,7 +60,19 @@
                         <?php endforeach; ?>
                     </select>
                 </div>
+                <div align="center" class="field-list">
+                    <label for="interests_choice">Séléctionnez un ou plusieurs centres d'intérêts :</label> <br>
+
+                    <?php foreach ($interests as $interest) : ?>
+                        <input type="checkbox" id="interests_choice" name="interests_choice[]" value="<?= $interest['id']; ?>"><?= $interest['interests_label']; ?>
+                    <?php endforeach; ?>
+
+                </div>
+
                 <input type="submit" value="Valider" class="btn">
+                <?php if (isset($errors['interests_choice'])) : ?>
+                    <p class="message error"><?= $errors['interests_choice']; ?></p>
+                <?php endif; ?>
             </fieldset>
         </form>
     </main>

@@ -1,12 +1,16 @@
 <?php
 
 require "config.php";
+require "functions.php";
+
 
 $filename = $argv[1];
 if (!file_exists($filename)) {
     echo "Erreur : fichier '$filename' introuvable";
     exit;
 }
+
+
 
 $file = fopen($filename, "r");
 
@@ -31,8 +35,9 @@ while ($row = fgetcsv($file)) {
     $lastname = strtolower($lastname);
     $lastname = ucwords($lastname, " -");
     $email = str_replace(" ", "", $email);
-
-    $pdoStatement->execute([$newDate, $email, $firstname, $lastname]);
+    if (verifyEmail($email) == false) {
+        $pdoStatement->execute([$newDate, $email, $firstname, $lastname]);
+    }
 }
 
 echo 'Import terminé!';
