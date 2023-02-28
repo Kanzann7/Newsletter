@@ -3,7 +3,8 @@
 /**
  * Récupère tous les enregistrements de la table origins
  */
-function getAllOrigins()
+
+function getPDOConnection()
 {
     // Construction du Data Source Name
     $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
@@ -17,7 +18,14 @@ function getAllOrigins()
     // Création de la connexion PDO (création d'un objet PDO)
     $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
     $pdo->exec('SET NAMES UTF8');
+    return $pdo;
+}
 
+
+function getAllOrigins()
+{
+
+    $pdo = getPDOConnection();
     $sql = 'SELECT *
             FROM origins
             ORDER BY originLabel';
@@ -30,18 +38,7 @@ function getAllOrigins()
 
 function getAllInterests()
 {
-    // Construction du Data Source Name
-    $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
-
-    // Tableau d'options pour la connexion PDO
-    $options = [
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ];
-
-    // Création de la connexion PDO (création d'un objet PDO)
-    $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
-    $pdo->exec('SET NAMES UTF8');
+    $pdo = getPDOConnection();
 
     $sql = 'SELECT *
             FROM interests
@@ -59,17 +56,7 @@ function getAllInterests()
  */
 function addSubscriber(string $email, string $firstname, string $lastname, int $originSelected)
 {
-    // Construction du Data Source Name
-    $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
-    // Tableau d'options pour la connexion PDO
-    $options = [
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ];
-
-    // Création de la connexion PDO (création d'un objet PDO)
-    $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
-    $pdo->exec('SET NAMES UTF8');
+    $pdo = getPDOConnection();
 
     // Insertion de l'email, prénom, nom de famille, l'origine et la date dans la table subscribers
     $sql = 'INSERT INTO subscribers
@@ -86,17 +73,7 @@ function addSubscriber(string $email, string $firstname, string $lastname, int $
 // ajout d'un intérêt à la base de données
 function addInterests($lastID, $interestSelected)
 {
-    // Construction du Data Source Name
-    $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
-    // Tableau d'options pour la connexion PDO
-    $options = [
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ];
-
-    // Création de la connexion PDO (création d'un objet PDO)
-    $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
-    $pdo->exec('SET NAMES UTF8');
+    $pdo = getPDOConnection();
 
     // Insertion de l'id de l'abonné et l'id de son intérêt dans la table subscribers
     foreach ($interestSelected as $interest_id) {
@@ -113,17 +90,7 @@ function addInterests($lastID, $interestSelected)
 function verifyEmail($target)
 {
 
-    // Construction du Data Source Name
-    $dsn = 'mysql:dbname=' . DB_NAME . ';host=' . DB_HOST;
-    // Tableau d'options pour la connexion PDO
-    $options = [
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ];
-
-    // Création de la connexion PDO (création d'un objet PDO)
-    $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
-    $pdo->exec('SET NAMES UTF8');
+    $pdo = getPDOConnection();
 
     $reqmail = $pdo->prepare("SELECT * FROM subscribers WHERE email = ?");
     $reqmail->execute(array($target));
