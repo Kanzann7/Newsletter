@@ -30,9 +30,10 @@ if (!empty($_POST)) {
 
 
     // Validation 
-    if (!$email) {
-        $errors['email'] = "Merci d'indiquer une adresse mail";
+    if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = "Merci d'indiquer une adresse mail valide";
     }
+
 
     if (!$firstname) {
         $errors['firstname'] = "Merci d'indiquer un prénom";
@@ -45,6 +46,7 @@ if (!empty($_POST)) {
     if (!$interestSelected) {
         $errors['interests_choice'] = "Veuillez cocher au moins une option !";
     }
+
 
     if (verifyEmail($email) == true) {
         $errors['email'] = "Cet email existe déjà !";
@@ -73,7 +75,11 @@ if (!empty($_POST)) {
 
 // Sélection de la liste des origines
 $origins = getAllOrigins();
+
 $interests = getAllInterests();
+
+
+
 
 // Inclusion du template
 include 'index.phtml';

@@ -31,7 +31,7 @@
                 <legend>Abonnez-vous à la newsletter !</legend>
                 <div class="field-list">
                     <label for="email">Adresse email</label>
-                    <input type="email" name="email" id="email" value="<?= $email ?>">
+                    <input type="text" name="email" id="email" value="<?= $email ?>">
                     <?php if (isset($errors['email'])) : ?>
                         <p class="message error"><?= $errors['email']; ?></p>
                     <?php endif; ?>
@@ -61,10 +61,12 @@
                     </select>
                 </div>
                 <div align="center" class="field-list">
-                    <label for="interests_choice">Séléctionnez un ou plusieurs centres d'intérêts :</label> <br>
+                    <h4>Sélectionnez un ou plusieurs centres d'intérêts :</h4> <br>
 
                     <?php foreach ($interests as $interest) : ?>
-                        <input type="checkbox" id="interests_choice" name="interests_choice[]" value="<?= $interest['id']; ?>"><?= $interest['interests_label']; ?>
+
+                        <input type="checkbox" id="interest-<?= $interest['id'] ?>" name="interests_choice[]" value="<?= $interest['id']; ?>" <?php if (isset($_POST['interests_choice']) && in_array($interest['id'], $_POST['interests_choice'])) echo 'checked'; ?>>
+                        <label for="interest-<?= $interest['id'] ?>"><?= $interest['interests_label']; ?></label>
                     <?php endforeach; ?>
 
                 </div>

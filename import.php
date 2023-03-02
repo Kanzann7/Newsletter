@@ -3,6 +3,9 @@
 require "config.php";
 require "functions.php";
 
+// $emails = getAllEmails();
+
+
 
 $filename = $argv[1];
 if (!file_exists($filename)) {
@@ -37,6 +40,9 @@ while ($row = fgetcsv($file)) {
     $email = str_replace(" ", "", $email);
     if (verifyEmail($email) == false) {
         $pdoStatement->execute([$newDate, $email, $firstname, $lastname]);
+    } else {
+
+        echo $email . " existe déjà ! \n";
     }
 }
 

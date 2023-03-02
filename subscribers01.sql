@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mar. 28 fév. 2023 à 15:30
+-- Généré le : jeu. 02 mars 2023 à 15:34
 -- Version du serveur : 8.0.30
 -- Version de PHP : 8.1.10
 
@@ -80,6 +80,21 @@ CREATE TABLE `subscribers` (
   `origine_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `subscribers`
+--
+
+INSERT INTO `subscribers` (`id`, `created_on`, `email`, `firstname`, `lastname`, `origine_id`) VALUES
+(73, '2023-03-02 09:32:33', 'clemjoulin@hotmail.fr', 's', 's', 9),
+(74, '2023-03-02 09:33:27', 'dsdsd', 'ssq', 's', 9),
+(75, '2023-03-02 13:15:57', 'alfred.dupont@gmail.com', 'Alfred', 'Dupont', NULL),
+(76, '2023-03-02 13:15:57', 'b.lav@hotmail.fr', 'Bertrand', 'Lavoisier', NULL),
+(77, '2023-03-02 13:15:57', 'SarahLAMINE@gmail.com', 'Sarah', 'Lamine', NULL),
+(78, '2023-03-02 13:15:57', 'mo78@laposte.net', 'Mohamed', 'Ben Salam', NULL),
+(79, '2023-03-02 14:31:09', 'fddfdf@gf.f', 'PACO', 'Joulin', 9),
+(80, '2023-03-02 16:18:09', 'clemoopjouslin@hotmail.fr', 'Clément', 'Joulin', 9),
+(81, '2023-03-02 16:21:05', 'clemjotrhrulin@hotmail.fr', 'PACO', 'BAL', 9);
+
 -- --------------------------------------------------------
 
 --
@@ -90,6 +105,17 @@ CREATE TABLE `subscribers_interests` (
   `subscribers_id` int NOT NULL,
   `interests_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `subscribers_interests`
+--
+
+INSERT INTO `subscribers_interests` (`subscribers_id`, `interests_id`) VALUES
+(73, 4),
+(74, 4),
+(79, 4),
+(80, 4),
+(81, 4);
 
 --
 -- Index pour les tables déchargées
@@ -112,6 +138,7 @@ ALTER TABLE `origins`
 --
 ALTER TABLE `subscribers`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
   ADD KEY `fksubscribers` (`origine_id`);
 
 --
@@ -141,7 +168,7 @@ ALTER TABLE `origins`
 -- AUTO_INCREMENT pour la table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- Contraintes pour les tables déchargées
