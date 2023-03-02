@@ -101,18 +101,3 @@ function verifyEmail($target)
         return false;
     }
 }
-
-
-function getAllEmails()
-{
-    $pdo = getPDOConnection();
-
-    $sql = 'SELECT email
-            FROM subscribers
-            ';
-
-    $query = $pdo->prepare($sql);
-    $query->execute();
-
-    return $query->fetchAll();
-}
