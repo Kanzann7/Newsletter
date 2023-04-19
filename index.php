@@ -56,7 +56,6 @@ if (!empty($_POST)) {
     }
 
     $verifyEmail = $subscribersModel->verifyEmail($email);
-    dump($verifyEmail);
     if ($verifyEmail == true) {
         $errors['email'] = "Cet email existe déjà !";
     }
