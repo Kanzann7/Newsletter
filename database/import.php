@@ -3,7 +3,8 @@
 require "config.php";
 require "functions.php";
 
-// $emails = getAllEmails();
+$subscribersModel = new App\Model\SubscribersModel();
+$verifyEmail = $subscribersModel->verifyEmail($email);
 
 
 
@@ -38,7 +39,7 @@ while ($row = fgetcsv($file)) {
     $lastname = strtolower($lastname);
     $lastname = ucwords($lastname, " -");
     $email = str_replace(" ", "", $email);
-    if (verifyEmail($email) == false) {
+    if ($verifyEmail == false) {
         $pdoStatement->execute([$newDate, $email, $firstname, $lastname]);
     } else {
 

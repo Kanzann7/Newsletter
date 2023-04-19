@@ -8,9 +8,9 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-    <link href="css/lib/normalize.css" rel="stylesheet">
-    <link href="css/lib/layout.css" rel="stylesheet">
-    <link href="css/lib/theme.css" rel="stylesheet">
+    <link href="css/normalize.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/theme.css" rel="stylesheet">
     <link href="css/newsletter.css" rel="stylesheet">
 </head>
 
@@ -65,8 +65,8 @@
 
                     <?php foreach ($interests as $interest) : ?>
 
-                        <input type="checkbox" id="interest-<?= $interest['id'] ?>" name="interests_choice[]" value="<?= $interest['id']; ?>" <?php if (isset($_POST['interests_choice']) && in_array($interest['id'], $_POST['interests_choice'])) echo 'checked'; ?>>
-                        <label for="interest-<?= $interest['id'] ?>"><?= $interest['interests_label']; ?></label>
+                        <input type="checkbox" id="interest-<?= $interest->getId() ?>" name="interests_choice[]" value="<?= $interest->getId(); ?>" <?php if (isset($_POST['interests_choice']) && in_array($interest->getId(), $_POST['interests_choice'])) echo 'checked'; ?>>
+                        <label for="interest-<?= $interest->getId() ?>"><?= $interest->getInterestsLabel(); ?></label>
                     <?php endforeach; ?>
 
                 </div>

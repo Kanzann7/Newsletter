@@ -1,10 +1,18 @@
 <?php
+require 'vendor/autoload.php';
 
+use App\Model\SubscribersModel;
+use App\Model\InterestsModel;
+use App\Model\OriginsModel;
 
 // Inclusion des dépendances
-require 'config.php';
-require 'functions.php';
 
+require 'app/config.php';
+require 'lib/functions.php';
+
+$subscribersModel = new SubscribersModel();
+$interestsModel = new InterestsModel();
+$originsModel = new OriginsModel();
 
 $errors = [];
 $success = null;
@@ -47,19 +55,20 @@ if (!empty($_POST)) {
         $errors['interests_choice'] = "Veuillez cocher au moins une option !";
     }
 
-
-    if (verifyEmail($email) == true) {
+    $verifyEmail = $subscribersModel->verifyEmail($email);
+    dump($verifyEmail);
+    if ($verifyEmail == true) {
         $errors['email'] = "Cet email existe déjà !";
     }
 
 
 
     // Si tout est OK (pas d'erreur)
-    if (empty($errors) && verifyEmail($email) == false) {
 
-        // Ajout de l'email dans le fichier csv
-        $lastID = addSubscriber($email, $firstname, $lastname, $originSelected);
-        addInterests($lastID, $interestSelected);
+    if (empty($errors)) {
+
+        $addSubscriber = $subscribersModel->addSubscriber($email, $firstname, $lastname, $originSelected);
+        $addInterests = $interestsModel->addInterests($lastID, $interestSelected);
 
         // Message de succès
         $success  = 'Merci de votre inscription';
@@ -74,9 +83,9 @@ if (!empty($_POST)) {
 //////////////////////////////////////////////////////
 
 // Sélection de la liste des origines
-$origins = getAllOrigins();
+$origins = $originsModel->getAllOrigins();
 
-$interests = getAllInterests();
+$interests = $interestsModel->getAllInterests();
 
 
 

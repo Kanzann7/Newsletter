@@ -5,12 +5,17 @@ namespace App\Entity;
 class Interests
 {
     private int $id;
-    private string $interests_label;
+    private string $interestsLabel;
 
-    public function __construct(int $id, string $interests_label)
+    public function __construct($data = [])
     {
-        $this->id = $id;
-        $this->interests_label = $interests_label;
+        foreach ($data as $propertyName => $value) {
+            $setter = 'set' . ucfirst($propertyName);
+
+            if (method_exists($this, $setter)) {
+                $this->$setter($value);
+            }
+        }
     }
 
     /**
@@ -36,15 +41,15 @@ class Interests
      */
     public function getInterestsLabel(): string
     {
-        return $this->interests_label;
+        return $this->interestsLabel;
     }
 
     /**
      * Set the value of interests_label
      */
-    public function setInterestsLabel(string $interests_label): self
+    public function setInterestsLabel(string $interestsLabel): self
     {
-        $this->interests_label = $interests_label;
+        $this->interestsLabel = $interestsLabel;
 
         return $this;
     }
